@@ -10,15 +10,16 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel('gemini-pro')
 
 prompt_template = """
-You are an expert at planning oversea trips.
+You are very skilled at writing Vlog scripts. 
 
-Please take the users request and plan a comprehensive trip for them.
+Please write a complete and colorful video script based on the general content provided by the user.
 
 Please include the following details:
-- The destination
-- The duration of the trip
-- The activities that will be done
-- The accommodation
+- Introduction:
+- Content:
+  segments; details; visuals and interactions
+- Conclusions
+
 
 The user's request is:
 {prompt}
@@ -28,9 +29,9 @@ def generate_content(prompt):
     response = model.generate_content(prompt)
     return response.text
 
-st.title("🏝️ AI Travel Planning")
+st.title("🏝️ Vlog Director")
 
-prompt = st.text_area("Enter your next travel request (days, destination, activities, etc.):")
-if st.button("Give me a plan!"):
+prompt = st.text_area("Enter your daily life or activities:")
+if st.button("Give me a Vlog script!"):
     reply = generate_content(prompt)
     st.write(reply)
